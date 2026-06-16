@@ -1,0 +1,5 @@
+# Google GenAI SDK for Gemini API
+google-genai==2.8.0
+
+# Environment variables management
+python-dotenv==1.2.2
