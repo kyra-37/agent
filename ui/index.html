@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Explorer - Multi-Step Math Solver</title>
+    <meta name="description" content="An interactive web dashboard demonstrating an autonomous AI agent executing multi-step mathematical operations with custom tools.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="brand">
+                <span class="brand-badge">Agentic Loop</span>
+                <h1>Math Solver Agent</h1>
+            </div>
+            <p class="subtitle">Watch an autonomous agent use calculator tools to solve complex expressions step-by-step.</p>
+            
+            <button id="btn-settings-toggle" class="btn-icon" title="API Settings">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </button>
+        </header>
+
+        <!-- Settings Panel (Drawer) -->
+        <div id="settings-panel" class="settings-panel hidden">
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h3>API Settings</h3>
+                    <button id="btn-settings-close" class="btn-close">&times;</button>
+                </div>
+                <div class="form-group">
+                    <label for="input-gemini-key">Gemini API Key</label>
+                    <input type="password" id="input-gemini-key" placeholder="AIzaSy..." autocomplete="off">
+                    <p class="help-text">If provided, the agent runs live calls to <code>gemini-2.5-flash</code>. If left empty, it runs in simulated demo mode.</p>
+                </div>
+                <div class="settings-actions">
+                    <button id="btn-save-settings" class="btn btn-primary">Save Config</button>
+                    <button id="btn-clear-settings" class="btn btn-secondary">Clear Key</button>
+                </div>
+            </div>
+        </div>
+
+        <main class="app-main">
+            <!-- Input Control Section -->
+            <section class="control-card">
+                <div class="input-wrapper">
+                    <label for="input-prompt">Enter Math Query</label>
+                    <textarea id="input-prompt" rows="2" placeholder="e.g. What is (137 * 48) + (256 / 16)?">What is (137 * 48) + (256 / 16)?</textarea>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="btn-run-simulation" class="btn btn-primary">
+                        <span class="btn-text">Run Local Simulation</span>
+                        <span class="btn-glow"></span>
+                    </button>
+                    <button id="btn-run-live" class="btn btn-secondary">
+                        <span class="btn-text">Run Live Gemini API</span>
+                    </button>
+                </div>
+                
+                <div class="mode-indicator">
+                    <span class="dot"></span>
+                    <span id="mode-text">Ready to run</span>
+                </div>
+            </section>
+
+            <!-- Agent Execution Timeline Workspace -->
+            <section class="timeline-container">
+                <div class="timeline-header">
+                    <h2>Agent Execution Workspace</h2>
+                    <button id="btn-clear-workspace" class="btn btn-text-only" disabled>Clear Output</button>
+                </div>
+                
+                <!-- Initial Empty State -->
+                <div id="empty-state" class="empty-state">
+                    <div class="empty-icon">🤖</div>
+                    <h3>No Active Execution</h3>
+                    <p>Enter a query above and run the agent to see the step-by-step thinking loop, tool actions, and results.</p>
+                </div>
+
+                <!-- Active Timeline of Steps -->
+                <div id="timeline-steps" class="timeline-steps hidden">
+                    <!-- Cards will be dynamically inserted here by app.js -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Built with Vanilla HTML/CSS/JS • Google GenAI SDK Compatible</p>
+        </footer>
+    </div>
+
+    <!-- Script Injection -->
+    <script src="app.js"></script>
+</body>
+</html>
